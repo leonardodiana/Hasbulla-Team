@@ -4,7 +4,7 @@ DATA 09/05/2023 2^ Lezione:
   1.  Leggere da input con Scanner una stringa che andremo ad elaborare;
   2.  Elaborare ed eseguire i cicli richiesti dal progetto utilizzando SWITCH come menù che ci darà l'opzione di stampare solo un ciclo oppure tutto;
   3.  Momentaneamente l'output di ogni ciclo sarà in console;
-  4.  Se saremo produttivi visualizzeremo tutto l'elararto su un file HTML;
+  4.  Se saremo produttivi visualizzeremo tutto l'elaborato su un file HTML;
   
   Ore 10:20
   Abbiamo discusso su cosa elaborare oggi e per prima cosa partiremo dai cicli richiesti dal progetto. Ognuno si occuperà di un ciclo:
