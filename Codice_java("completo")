@@ -1,0 +1,190 @@
+http://www.star.dist.unige.it/~tac/FDI-SV/Materiale/Fondamenti1/Esercizi/ConteggioParole.html
+
+// Questa classe contiene diversi metodi per il conteggio di parole
+// in una frase contenuta in un oggetto String
+// - contaParole: la procedura per il conteggio delle parole mostrata
+//   nell'unità didattica 4 (ha il problema che il conteggio parole è
+//   sbagliato se la frase contiene spazi in fondo)
+// - contaParoleTrim: una soluzione corretta al conteggio delle parole
+//   in una frase che utilizza il metodo trim della classe String
+// - contaParoleNoTrim: una soluzione corretta al conteggio
+//   delle parole in una frase che *non* utilizza il metodo trim di String
+// - contaParoleECaratteri: conteggio di parole e caratteri alfabetici
+// - cercaNumeroDi: ricerca del numero di occorrenze di un dato carattere
+// - cercaNumeroDiIndexOf: come sopra, con l'utilizzo del metodo indexOf
+//   della classe String
+import javabook.*;
+
+class ConteggioParole {
+  // Oggetti per l'IO
+  private static MainWindow finestra;
+  private static InputBox richiestaDati;
+  private static OutputBox uscitaDati;
+
+  // La frase richiesta in ingresso su cui eseguire i metodi
+  private static String frase;
+
+  public static void main(String[] args) {
+    // Inizializzo gli oggetti per l'IO e la frase da manipolare
+    inizializzaIO();
+    inizializzaFrase();
+    // Creo uno StringBuffer per contenere i risultati dell'analisi
+    StringBuffer risultati = new StringBuffer("");
+    risultati.append("Hai inserito la frase: " + frase + "\n");
+    risultati.append("che consta di " + frase.length() + " caratteri.\n");
+    // Ogni metodo restituisce un messaggio
+    risultati.append(contaParole());
+    risultati.append(contaParoleTrim());
+    risultati.append(contaParoleNoTrim());
+    risultati.append(contaParoleECaratteri());
+    // Non c'è un metodo di InputBox per richiedere un carattere
+    // Chiedo una String e poi prendo solo il primo carattere
+    String temp = richiestaDati.getString("Inserisci un carattere: ");
+    char c = temp.charAt(0);
+    // Invoco gli ultimi due metodi (che necessitano di c)
+    risultati.append(contaNumeroDi(c));
+    risultati.append(contaNumeroDiIndexOf(c));
+    // Mostro i risultati (il metodo print accetta uno StringBuffer)
+    uscitaDati.print(risultati);
+    uscitaDati.show();
+  }
+
+  // Metodo di conteggio delle parole (base)
+  private static String contaParole() {
+    int nc = frase.length();
+    int indice = 0, numeroParole = 0;
+
+    while (indice < nc) {
+      // ignora gli spazi bianchi
+      while ((indice < nc) && (frase.charAt(indice) == ' ')) {
+        indice++;
+      }
+      // trova la fine della parola
+      while ((indice < nc) && (frase.charAt(indice) != ' ')) {
+        indice++;
+      }
+      // un'altra parola trovata, incremento del contatore
+      numeroParole++;
+    }
+    return ("(contaParole) Numero di parole: " + numeroParole + "\n");
+  }
+
+  // Conteggio parole corretto con l'uso di trim
+  private static String contaParoleTrim() {
+    String temp = frase.trim();
+    int nc = temp.length();
+    int indice = 0, numeroParole = 0;
+
+    while (indice < nc) {
+      // ignora gli spazi bianchi
+      while ((indice < nc) && (temp.charAt(indice) == ' ')) {
+        indice++;
+      }
+      // trova la fine della parola
+      while ((indice < nc) && (temp.charAt(indice) != ' ')) {
+        indice++;
+      }
+      // un'altra parola trovata, incremento del contatore
+      numeroParole++;
+    }
+    return ("(contaParoleTrim) Numero di parole: " + numeroParole + "\n");
+  }
+
+  // Conteggio parole corretto senza l'uso di trim
+  private static String contaParoleNoTrim() {
+    int nc = frase.length();
+    int indice = 0, numeroParole = 0;
+
+    while (indice < nc) {
+      // ignora gli spazi bianchi
+      while ((indice < nc) && (frase.charAt(indice) == ' ')) {
+        indice++;
+      }
+      // Controllo aggiuntivo per evitare l'incremento del
+      // numero di parole in presenza di spazi a fine frase
+      if (indice < nc) {
+        // trova la fine della parola
+        while ((indice < nc) && (frase.charAt(indice) != ' ')) {
+          indice++;
+        }
+        // un'altra parola trovata, incremento del contatore
+        numeroParole++;
+      }
+    }
+    return ("(contaParoleNoTrim) Numero di parole: " +
+            numeroParole + "\n");
+  }
+
+  // Conteggio di parole e caratteri
+  private static String contaParoleECaratteri() {
+    String temp = frase.trim();
+    int nc = temp.length();
+    int indice = 0, numeroParole = 0, numeroCaratteri = 0;
+
+    while (indice < nc) {
+      // ignora gli spazi bianchi
+      while ((indice < nc) && (temp.charAt(indice) == ' ')) {
+        indice++;
+      }
+      // trova la fine della parola
+      while ((indice < nc) && (temp.charAt(indice) != ' ')) {
+        char c = temp.charAt(indice);
+        if ((c >= 'A' && c <= 'Z') ||
+            (c >= 'a' && c <= 'z')) {
+          // un'altro carattere trovato, incremento del contatore
+          numeroCaratteri++;
+        }
+        indice++;
+      }
+      // un'altra parola trovata, incremento del contatore
+      numeroParole++;
+    }
+    return ("(contaParoleECaratteri) Numero di parole: " + numeroParole +
+            " Numero di caratteri: " + numeroCaratteri + "\n");
+  }
+
+  // Questo metodo cerca il numero di occorrenze di un dato carattere
+  private static String contaNumeroDi(char c) {
+    int numeroOccorrenze = 0;
+    for(int i = 0; i < frase.length(); ++i) {
+      if (frase.charAt(i) == c) {
+        ++numeroOccorrenze;
+      }
+    }
+    return ("(contaNumeroDi) Il numero di occorrenze del carattere " + c +
+            " è pari a: " + numeroOccorrenze + "\n");
+  }
+
+  // Questo metodo cerca il numero di occorrenze di un dato carattere
+  // usando il metodo indexOf della classe String
+  private static String contaNumeroDiIndexOf(char c) {
+    int numeroOccorrenze = 0;
+    int posizione = frase.indexOf(c);
+    while (posizione >= 0) {
+      ++numeroOccorrenze;
+      posizione = frase.indexOf(c,posizione + 1);
+    }
+    return ("(contaNumeroDiIndexOf) Il numero di occorrenze del carattere "
+            + c + " è pari a: " + numeroOccorrenze + "\n");
+  }
+
+  // Questo metodo crea gli oggetti necessari per gli IO
+  // e li memorizza nei relativi attributi. Rende inoltre visibile
+  // la finestra dell'applicazione
+  private static void inizializzaIO() {
+    // Dichiaro e creo gli oggetti necessari per l'IO
+    finestra = new MainWindow("Elaborazione testi");
+    richiestaDati = new InputBox(finestra, "Inserimento dati");
+    uscitaDati = new OutputBox(finestra, "Risultati");
+    // Rendo visibile la finestra principale
+    finestra.show();
+  }
+
+  // Questo metodo richiede i coefficienti e crea il polinomio
+  private static void inizializzaFrase() {
+    // Richiedo la frase su cui eseguire le elaborazioni
+    frase = richiestaDati.getString("Inserisci una frase: ");
+  }
+
+
+}
