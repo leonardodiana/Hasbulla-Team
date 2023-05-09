@@ -1,4 +1,6 @@
-http://www.star.dist.unige.it/~tac/FDI-SV/Materiale/Fondamenti1/Esercizi/ConteggioParole.html
+Link pagina codice: http://www.star.dist.unige.it/~tac/FDI-SV/Materiale/Fondamenti1/Esercizi/ConteggioParole.html
+link trim(): https://www.w3schools.com/java/ref_string_trim.asp
+link indexof(): https://www.w3schools.com/java/ref_string_indexof.asp
 
 // Questa classe contiene diversi metodi per il conteggio di parole
 // in una frase contenuta in un oggetto String
