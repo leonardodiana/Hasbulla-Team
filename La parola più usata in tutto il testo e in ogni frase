@@ -1,0 +1,59 @@
+import java.util.*;
+
+public class MostUsedWords {
+    public static void main(String[] args) {
+        String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut mauris lorem, "
+            + "efficitur eu rutrum in, eleifend sit amet velit. Sed id nisl vel est convallis "
+            + "sollicitudin. Maecenas quis quam in justo tristique pellentesque. Nam malesuada "
+            + "sodales nibh. Sed sed sed molestie neque vel eleifend fermentum.";
+
+        // Divide il testo in frasi
+        String[] sentences = text.split("\\.");
+
+        // Conta le parole in ogni frase
+        Map<String, Integer>[] counts = new HashMap[sentences.length];
+        for (int i = 0; i < sentences.length; i++) {
+            String[] words = sentences[i].trim().split("\\s+");
+            Map<String, Integer> wordCounts = new HashMap<>();
+            for (String word : words) {
+                wordCounts.put(word, wordCounts.getOrDefault(word, 0) + 1);
+            }
+            counts[i] = wordCounts;
+        }
+
+        // Trova la parola più utilizzata in tutto il testo
+        Map<String, Integer> wordCounts = new HashMap<>();
+        for (int i = 0; i < counts.length; i++) {
+            for (String word : counts[i].keySet()) {
+                wordCounts.put(word, wordCounts.getOrDefault(word, 0) + counts[i].get(word));
+            }
+        }
+        String mostUsedWord = "";
+        int maxCount = 0;
+        for (String word : wordCounts.keySet()) {
+            if (wordCounts.get(word) > maxCount) {
+                mostUsedWord = word;
+                maxCount = wordCounts.get(word);
+            }
+        }
+        System.out.println("La parola più utilizzata nel testo è: " + mostUsedWord);
+
+        // Trova il numero di parole più utilizzate in ogni frase
+        String mostUsedWord2 = "";
+        for (int i = 0; i < counts.length; i++) {
+            int maxCountPerSentence = 0;
+            for (String word : counts[i].keySet()) {
+                if (counts[i].get(word) > maxCountPerSentence) {
+                	mostUsedWord2 = word;
+                    maxCountPerSentence = counts[i].get(word);
+                }
+            }
+            if(maxCountPerSentence > 1) {
+            System.out.println("La parola più utilizzata nella frase " + (i+1) + " è: " + mostUsedWord2 + " e viene ripetuta " + maxCountPerSentence + " volte ");
+            }
+            else {
+            	System.out.println("Le parole nella frase " + (i+1)+" non vengono ripetute");
+            }
+        }
+    }
+}
