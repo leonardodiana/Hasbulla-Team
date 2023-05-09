@@ -1,0 +1,8 @@
+	public static int contaFrasi(String testo) {
+		String[] frasi= testo.split("\\.\\s+");
+		int numeroFrasi=frasi.length;
+		for(int i=0; i<frasi.length; i++) {
+			System.out.println(frasi[i].trim());
+		}
+		return numeroFrasi;
+	}
