@@ -1,14 +1,16 @@
+
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class MostUsedWords {
     public static void main(String[] args) {
-        String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut mauris lorem, "
+        String text = "Lorem ipsum 54 54 54 54 54 dolor sit amet, consectetur adipiscing elit. Ut mauris lorem, "
             + "efficitur eu rutrum in, eleifend sit amet velit. Sed id nisl vel est convallis "
             + "sollicitudin. Maecenas quis quam in justo tristique pellentesque. Nam malesuada "
-            + "sodales nibh. Sed sed sed molestie neque vel eleifend fermentum.";
+            + "sodales nibh. Sed sed sed 3.14 molestie neque vel eleifend fermentum.";
 
         // Divide il testo in frasi
-        String[] sentences = text.split("\\.");
+        String[] sentences = splitSentences(text);
 
         // Conta le parole in ogni frase
         Map<String, Integer>[] counts = new HashMap[sentences.length];
@@ -56,4 +58,13 @@ public class MostUsedWords {
             }
         }
     }
+
+	public static String[] splitSentences(String text) {
+		// TODO Auto-generated method stub
+		String regex = "(?<!\\d)\\.\\s+";
+		Pattern pattern = Pattern.compile(regex);
+		String[] sentences = pattern.split(text);
+		
+		return sentences;
+	}
 }
