@@ -16,3 +16,16 @@ DATA 09/05/2023 2^ Lezione:
   
   Ore 10:40
   Suddivisi i compiti ognuno si documenterà e proverà a scrivere il suo ciclo, avremo un confronto alle ore 12:00
+  
+  Ore 12:00
+  Abbiamo confrontato i codici e le varie problematiche riscontrate riuscendo a risolverle. Questi cicli verrano successivamente modificati e addattati ai metodi che useremo.
+  
+  Ore 12:40
+  Stesura Macro degli obbiettivi:
+  1.  Parte Front-end con l'elaborazione di un file index.html dove verrà steso il testo e apparirà l'output richiesto
+  2.  Creazione DB dove verrà salvato il testo inserito e i vari output richiesti da mostrare sul sito
+  3.  Elaborazione del testo su Eclipse
+  
+  Stesura Micro per Martedì 16/05/2023 3^ Lezione:
+  - Stesura programma completo su console con i vari cicli ed i suoi output tramite switch
+  - Documentazione e implementazione DB su JAVA con SPRING
