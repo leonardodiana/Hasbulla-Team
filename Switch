@@ -1,0 +1,50 @@
+/* realizzazione di un menu' per operazioni con array (uso di switch) */
+
+/*stampa delle opzioni del menu'
+*/
+void menu()
+{
+	printf("\n0. Uscita");
+	printf("\n1. Stampa");
+	printf("\n2. Calcolo del minimo");
+	printf("\n3. Calcolo del massimo");
+	printf("\n4. Calcolo della media");	
+}
+
+int main(int argc, char *argv[]) 
+{
+	int v[DIM];
+	int i, s;
+	
+	for (i=0; i<DIM; i++)
+	{
+		printf("Inserisci un numero nell'array: ");
+		scanf("%d", &v[i]);
+	}
+	
+	menu();
+	printf("\nIntroduci selezione: ");
+	scanf("%d", &s);
+	while(s!=0)
+	{	
+		switch(s)
+		{
+			case 0:
+				break;
+			case 1: //stampa dell'array
+				break;
+			case 2: //calcolo e la stampa del minimo
+				break;
+			case 3: //calcolo e la stampa del massimo
+				break;
+			case 4: //calcolo e la stampa delle media
+				break;
+			default: //tutti i valori diversi da quelli precedenti
+				printf("Errore: inserire il numero corrispondente a una opzione");
+		}
+		menu();
+		printf("\nIntroduci selezione: ");
+		scanf("%d", &s);		
+	}
+	return 0;
+}
