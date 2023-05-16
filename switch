@@ -1,0 +1,39 @@
+package com.onnis.utils;
+
+import java.util.Scanner;
+
+public class Switch {
+
+	public static void main(String[] args) {
+		
+		Scanner scanner = new Scanner(System.in);
+        System.out.print("Inserisci il numero per la scelta: ");
+        int scelta = scanner.nextInt();
+
+        switch (scelta) {
+            case 1:
+                // Codice per la funzione 1
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                // Codice per la funzione 3
+                break;
+            case 4:
+                // Codice per la funzione 4
+                break;
+            case 5:
+                // Codice per la funzione 5
+                break;
+            case 6:
+                // Codice per la funzione 6
+                break;
+            default:
+                // Codice per gestire valori non validi
+        }
+    }
+		
+}
+
+
