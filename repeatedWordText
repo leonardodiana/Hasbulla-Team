@@ -1,0 +1,15 @@
+public static repeatedWordText(String text)
+String [] parole=testo.split("[\\p{Punct}&&[^.@]]+|\\s+");
+		int i=0, j, count=0, maxCount = 0;
+		String mostRepeatedWord = parole[i];
+		for(i=0; i<parole.length; i++) {
+			for(j=0; j<parole.length;j++) {
+				if (parole[i]==parole[j]) {
+							count++;
+				}
+				if (count>maxCount) {
+					mostRepeatedWord = parole[i];
+				}
+			}
+			return mostRepeatedWord
+		}
