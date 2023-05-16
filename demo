@@ -1,0 +1,67 @@
+package test;
+
+import java.util.Scanner;
+
+public class Demo {
+	
+	public static int contaFrasi(String testo){
+		String[] frasi= testo.split("\\.\\s+");
+		int numeroFrasi=frasi.length;
+		for(int i=0; i<frasi.length; i++) {
+			frasi[i].trim();
+		}
+		return numeroFrasi;
+	}
+	public static String[] longestWords(String text) {
+	    String[] sentences = text.split("(?<!\\d)\\.(?!\\d)|\\?|!");
+	    String[] longestWords = new String[sentences.length];
+	    for (int i = 0; i < sentences.length; i++) {
+	        longestWords[i] = longestWord(sentences[i]) + " (frase " + (i + 1) + ")";
+	    }
+	    return longestWords;
+	}
+
+    public static String longestWord(String text) {
+        String[] words = text.split("[\\p{Punct}&&[^.@]]+|\\s+");
+        String longestWord = "";
+        for (String word : words) {
+            if (word.length() > longestWord.length()) {
+                longestWord = word;
+            }
+        }
+        return longestWord;
+    }
+	
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Incolla il testo da analizzare: ");
+		String text =scanner.nextLine();
+        System.out.println("Inserisci il numero per la scelta: ");
+        int scelta = scanner.nextInt();
+
+        switch (scelta) {
+            case 1:
+                int numeroFrasi= contaFrasi(text);
+                System.out.println("Nel testo ci sono " + numeroFrasi + " frasi.");
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                // Codice per la funzione 3
+                break;
+            case 4:
+                // Codice per la funzione 4
+                break;
+            case 5:
+                // Codice per la funzione 5
+                break;
+            case 6:
+                // Codice per la funzione 6
+                break;
+            default:
+                // Codice per gestire valori non validi
+        }
+		
+}
