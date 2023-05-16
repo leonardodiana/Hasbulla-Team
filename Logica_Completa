@@ -1,0 +1,137 @@
+package com.onnis.utils;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Switch {
+	
+	public static int contaFrasi(String testo){
+		String[] frasi= testo.split("\\.\\s+");
+		int numeroFrasi=frasi.length;
+		for(int i=0; i<frasi.length; i++) {
+			frasi[i].trim();
+		}
+		return numeroFrasi;
+	}
+	
+	public static String[] longestWords(String text) {
+	    String[] sentences = text.split("(?<!\\d)\\.(?!\\d)|\\?|!");
+	    String[] longestWords = new String[sentences.length];
+	    for (int i = 0; i < sentences.length; i++) {
+	        longestWords[i] = longestWord(sentences[i]) + " (frase " + (i + 1) + ")";
+	    }
+	    return longestWords;
+	}
+	
+	public static String longestWord(String text) {
+        String[] words = text.split("[\\p{Punct}&&[^.@]]+|\\s+");
+        String longestWord = "";
+        for (String word : words) {
+            if (word.length() > longestWord.length()) {
+                longestWord = word;
+            }
+        }
+        return longestWord;
+    }
+	
+	public static int wordCount(String text) {
+	    String[] words = text.split("\\s+");
+	    int count = 0;
+	    for (String word : words) {
+	        if (!word.trim().isEmpty()) {
+	            count++;
+	        }
+	    }
+	    return count;
+	}
+	
+	public static int characterCount(String text) {
+	    return text.length();
+	}
+	
+	public static String repeatedWordText(String text) {
+	String [] parole= text.split("[\\p{Punct}&&[^.@]]+|\\s+");
+			int i=0, j, count=0, maxCount = 0;
+			String mostRepeatedWord = "";
+			for(i=0; i<parole.length; i++) {
+				for(j=0; j<parole.length;j++) {
+					if (parole[i]==parole[j]) {
+								count++;
+					}
+					if (count>maxCount) {
+						mostRepeatedWord = parole[i];
+					}
+				}
+			}
+			return mostRepeatedWord;
+	}
+	
+	
+
+	public static void main(String[] args) {
+		
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Inserisci il testo");
+		String text = scanner.nextLine();
+		System.out.println("Menù di scelta:\n 1 - Conta frasi all'interno del testo \n 2 - Conta le parole più lunghe all'interno di ogni frase \n 3 - Conta la parola più lunga all'interno del testo \n 4 - Parola più usata nel testo \n 5 - Numero di parole nel testo \n 6 - Numero di caratteri nel testo \n 7 - Utilizza tutte le funzioni \n 8 - Esci");
+    	System.out.println("Inserisci il numero per la scelta: ");
+		int scelta = scanner.nextInt();
+        while(scelta!=8) {
+        switch (scelta) {
+            case 1:
+            	int numeroFrasi= contaFrasi(text);
+                System.out.println("Nel testo ci sono " + numeroFrasi + " frasi.");
+                break;
+            case 2:
+        		String[] longestWords = longestWords(text);
+        		System.out.println("Le parole più lunghe sono: " + Arrays.toString(longestWords));
+                break;
+            case 3:
+            	String longestWord = longestWord(text);
+        		System.out.println("La parola più lunga è: " + longestWord);
+                break;
+            case 4:
+            	String repeatedWord = repeatedWordText(text);
+                System.out.println("Le parole più usata nel testo è " + repeatedWord);
+                break;
+           
+            case 5:
+            	int wordsInText = wordCount(text);
+                System.out.println("Il numero delle parole nel testo è "+ wordsInText);
+                break;
+            case 6:
+            	int characterCount = characterCount(text);
+                System.out.println("Il numero di caratteri nel testo è "+ characterCount);
+                break;
+            case 7:
+            	int numeroFrasiA= contaFrasi(text);
+            	System.out.println("Nel testo ci sono " + numeroFrasiA + " frasi.");
+            	String[] longestWordsA = longestWords(text);
+            	String longestWordA = longestWord(text);
+            	String repeatedWordA = repeatedWordText(text);
+            	
+            	int wordsInTextA = wordCount(text);
+            	int characterCountA = characterCount(text);
+            	
+            	System.out.println("\nLe parole più lunghe sono: " + Arrays.toString(longestWordsA));
+            	System.out.println("\nLa parola più lunga è: " + longestWordA);
+            	System.out.println("\nLe parole più usata nel testo è " + repeatedWordA);
+            	
+                System.out.println("\nIl numero delle parole nel testo è "+ wordsInTextA);
+                System.out.println("\nIl numero di caratteri nel testo è "+ characterCountA);
+                break;
+            case 8:
+            	break;
+            
+            default:
+                System.out.println("Numero non valido.\nInserisci un numero tra quelli presenti nel menù");
+        	}
+        System.out.println("\nMenù di scelta:\n 1 - Conta frasi all'interno del testo \n 2 - Conta le parole più lunghe all'interno di ogni frase \n 3 - Conta la parola più lunga all'interno del testo \n 4 - Parola più usata nel testo \n 5 - Numero di parole nel testo \n 6 - Numero di caratteri nel testo \n 7 - Utilizza tutte le funzioni \n 8 - Esci\"");
+        System.out.println("Inserisci il numero per la scelta: ");
+        scelta=scanner.nextInt();
+        }
+		
+	}
+}
+
+
