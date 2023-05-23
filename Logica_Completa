@@ -1,12 +1,16 @@
 package com.onnis.utils;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class Switch2 {
+public class Switch {
 	
 	public static int contaFrasi(String testo){
 		String[] frasi= testo.split("\\.\\s+");
@@ -84,8 +88,26 @@ public class Switch2 {
 	public static void main(String[] args) {
 		
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Inserisci il testo");
-		String text = scanner.nextLine();
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader("C:\\Users\\ICTS22-24.084\\Desktop\\provatesto.txt"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		StringBuilder sb = new StringBuilder();
+		String line;
+		try {
+			while ((line = reader.readLine()) != null) {
+			    sb.append(line);
+			    sb.append(System.lineSeparator());
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String text = sb.toString();
+		
 		System.out.println("Menù di scelta:\n 1 - Conta frasi all'interno del testo \n 2 - Conta le parole più lunghe all'interno di ogni frase \n 3 - Conta la parola più lunga all'interno del testo \n 4 - Parola più usata nel testo \n 5 - Numero di parole nel testo \n 6 - Numero di caratteri nel testo \n 7 - Utilizza tutte le funzioni \n 8 - Conta le parole all'interno di ogni frase \n 9 - Esci");
     	System.out.println("Inserisci il numero per la scelta: ");
 		int scelta = scanner.nextInt();
