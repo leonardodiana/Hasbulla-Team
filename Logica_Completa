@@ -22,7 +22,7 @@ public class Switch {
 	}
 	
 	public static String[] longestWords(String text) {
-	    String[] sentences = text.split("(?<!\\d)\\.(?!\\d)|\\?|!");
+	    String[] sentences = text.split("\\.\\s");
 	    String[] longestWords = new String[sentences.length];
 	    for (int i = 0; i < sentences.length; i++) {
 	        longestWords[i] = longestWord(sentences[i]) + " (frase " + (i + 1) + ")";
@@ -31,7 +31,7 @@ public class Switch {
 	}
 	
 	public static int[] countWordsInSentences(String text) {
-	    String[] sentences = text.split("(?<!\\d)\\.(?!\\d)|\\?|!");
+	    String[] sentences = text.split("\\.\\s+");
 	    int[] wordCounts = new int[sentences.length];
 	    for (int i = 0; i < sentences.length; i++) {
 	        String[] words = sentences[i].trim().split("\\s+");
@@ -90,7 +90,7 @@ public class Switch {
 		Scanner scanner = new Scanner(System.in);
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new FileReader("C:\\Users\\ICTS22-24.084\\Desktop\\provatesto.txt"));
+			reader = new BufferedReader(new FileReader("C:\\Users\\ICTS22-24.084\\Desktop\\provaa.txt"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -177,3 +177,5 @@ public class Switch {
 	}
 }
 	
+
+
