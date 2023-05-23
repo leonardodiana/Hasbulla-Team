@@ -1,0 +1,120 @@
+// Importo le classi necessarie per la connessione e le query
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+// Importo le classi di Spring per la gestione dei dati e delle eccezioni
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.ResultSetExtractor;
+
+// Definisco una classe che rappresenta un utente del database
+class User {
+  // Dichiaro le variabili di istanza per i campi dell'utente
+  private int id;
+  private String name;
+  private String email;
+
+  // Creo un costruttore vuoto
+  public User() {}
+
+  // Creo un costruttore con i parametri
+  public User(int id, String name, String email) {
+    this.id = id;
+    this.name = name;
+    this.email = email;
+  }
+
+  // Creo i metodi getter e setter per le variabili di istanza
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+// Definisco una classe che implementa l'interfaccia ResultSetExtractor di Spring
+// Questa classe serve per estrarre i dati dal ResultSet e creare degli oggetti User
+class UserExtractor implements ResultSetExtractor<User> {
+
+  // Implemento il metodo extractData che prende in input un ResultSet e restituisce un User
+  @Override
+  public User extractData(ResultSet rs) throws SQLException, DataAccessException {
+    // Creo un oggetto User vuoto
+    User user = new User();
+    // Controllo se il ResultSet ha almeno una riga
+    if (rs.next()) {
+      // Imposto le variabili di istanza dell'utente con i valori del ResultSet
+      user.setId(rs.getInt("id"));
+      user.setName(rs.getString("name"));
+      user.setEmail(rs.getString("email"));
+    }
+    // Restituisco l'utente estratto
+    return user;
+  }
+}
+
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+// Definisco una classe che gestisce la connessione e le query al database MySQL
+class DatabaseManager {
+
+  // Dichiaro una variabile di istanza per il JdbcTemplate di Spring
+  private JdbcTemplate jdbcTemplate;
+
+  // Creo un costruttore che prende in input i parametri della connessione al database
+  public DatabaseManager(String url, String username, String password) throws SQLException {
+    // Creo una connessione al database usando il DriverManager di Java
+    Connection connection = DriverManager.getConnection(url, username, password);
+    // Creo un oggetto JdbcTemplate passando la connessione come argomento
+    jdbcTemplate = new JdbcTemplate(connection);
+  }
+
+  // Definisco un metodo per inserire un nuovo utente nel database
+  public void insertUser(User user) {
+    // Definisco la query SQL per l'inserimento con dei placeholder (?) per i valori da inserire
+    String sql = "INSERT INTO users (name, email) VALUES (?, ?)";
+    // Creo un oggetto PreparedStatementCreator di Spring passando la query come argomento
+    PreparedStatementCreator psc = new PreparedStatementCreator(sql);
+    // Eseguo la query usando il metodo update del JdbcTemplate e passando il PreparedStatementCreator e i valori da inserire
+    jdbcTemplate.update(psc, user.getName(), user.getEmail());
+  }
+
+  // Definisco un metodo per ottenere un utente dal database dato il suo id
+  public User getUserById(int id) {
+    // Definisco la query SQL per la selezione con un placeholder (?) per il valore da cercare
+    String sql = "SELECT * FROM users WHERE id = ?";
+    // Creo un oggetto UserExtractor di Spring per estrarre i dati dal ResultSet
+    UserExtractor ue = new UserExtractor();
+    // Eseguo la query usando il metodo query del JdbcTemplate e passando la query, il UserExtractor e il valore da cercare
+    // Il metodo query restituisce un oggetto User estratto dal ResultSet
+    User user = jdbcTemplate.query(sql, ue, id);
+    // Restituisco l'utente trovato o null se non esiste
+    return user;
+  }
+
+}
