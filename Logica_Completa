@@ -72,7 +72,7 @@ public class Switch {
 			String mostRepeatedWord = "";
 			for(i=0; i<parole.length; i++) {
 				for(j=0; j<parole.length;j++) {
-					if (parole[i]==parole[j]) {
+					if (parole[i].equals(parole[j])) {
 								count++;
 					}
 					if (count>maxCount) {
@@ -147,6 +147,10 @@ public class Switch {
             	
             	int wordsInTextA = wordCount(text);
             	int characterCountA = characterCount(text);
+            	int[] wordCountsA = countWordsInSentences(text);
+                for (int i = 0; i < wordCountsA.length; i++) {
+                    System.out.println("\nLa frase " + (i + 1) + " contiene " + wordCountsA[i] + " parole.");
+                }
             	
             	System.out.println("\nLe parole più lunghe sono: " + Arrays.toString(longestWordsA));
             	System.out.println("\nLa parola più lunga è: " + longestWordA);
@@ -173,5 +177,3 @@ public class Switch {
 	}
 }
 	
-
-
