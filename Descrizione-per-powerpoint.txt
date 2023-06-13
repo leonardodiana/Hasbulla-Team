@@ -1,0 +1,7 @@
+Il software che abbiamo ipotizzato per il cliente consiste con
+la creazione di un software Java utilizzando il framework Spring, con il suo applicativo Spring Boot,
+Hibernate, Thymeleaf. Questi strumenti ci agevolano il collegamento con un DB MySql e lo sviluppo di una pagina web.
+Il nostro programma ci permette attualmente di analizzare il testo in base alla richiesta quantitativa e qualitativa
+fornendo i risultati sul database. Inoltre, è possibile sfruttare i comandi SQL per interrogare il DB e mostrare i vari recordset.
+Il nostro obiettivo è quello di mostrare il risultato delle richieste logiche su una pagina web statica. Prevediamo di concludere
+questo passaggio in 8 ore
