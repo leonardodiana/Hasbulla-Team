@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Risultati API</title>
+</head>
+<body>
+    <h1>Risultati API</h1>
+    <div id="results"></div>
+
+    <script>
+        // Indirizzo dell'API
+        var data = "http://localhost:9065/testi";
+		
+        // Selezionare l'elemento in cui visualizzare i risultati
+        var resultsElement = document.body;
+
+        // Ottenere i dati dall'API utilizzando fetch
+        fetch(data)
+            .then(response => response.json())
+            .then(data => {
+            	
+            	console.log(data[0])
+              // Creare gli elementi HTML per visualizzare i dati
+                var idElement = document.createElement("p");
+                idElement.textContent = "ID: " + data[0].id;
+                resultsElement.appendChild(idElement);
+
+                var contenutoElement = document.createElement("p");
+                contenutoElement.textContent = "Contenuto: " + data[0].contenuto;
+                resultsElement.appendChild(contenutoElement);
+
+                var numeroParoleElement = document.createElement("p");
+                numeroParoleElement.textContent = "Numero parole: " + data[0].numeroParole;
+                resultsElement.appendChild(numeroParoleElement);
+
+                var numeroFrasiElement = document.createElement("p");
+                numeroFrasiElement.textContent = "Numero frasi: " + data[0].numeroFrasi;
+                resultsElement.appendChild(numeroFrasiElement);
+
+                var numeroCaratteriElement = document.createElement("p");
+                numeroCaratteriElement.textContent = "Numero caratteri: " + data[0].numeroCaratteri;
+                resultsElement.appendChild(numeroCaratteriElement);
+
+                var parolaChiaveElement = document.createElement("p");
+                parolaChiaveElement.textContent = "Parola chiave: " + data[0].parolaChiave;
+                resultsElement.appendChild(parolaChiaveElement);
+
+                var parolaPiùLungaElement = document.createElement("p");
+                parolaPiùLungaElement.textContent = "Parola più lunga: " + data[0].parolaPiùLunga;
+                resultsElement.appendChild(parolaPiùLungaElement);
+
+            })
+            
+        var dataFrase = "http://localhost:9065/frase";
+		
+        // Selezionare l'elemento in cui visualizzare i risultati
+        var resultsElement = document.body;
+
+        // Ottenere i dati dall'API utilizzando fetch
+        fetch(dataFrase)
+            .then(response => response.json())
+            .then(dataFrase => {
+            	
+                console.log(dataFrase)
+                
+                var spazioNumeroParoleFrase = document.createElement("h3");
+                spazioNumeroParoleFrase.textContent= "Numero di parole per ogni frase";
+                resultsElement.appendChild(spazioNumeroParoleFrase);
+                
+                for(i=0, j=1; i<dataFrase.length, j<dataFrase.length + 1; i++, j++){
+                var parolePerFrasiElement = document.createElement("p");
+                parolePerFrasiElement.textContent = "Frase n°: " + j + ". Numero parole: " + dataFrase[i].numeroParole;
+                resultsElement.appendChild(parolePerFrasiElement);
+                }
+                
+                var spazioParolaLungaFrase = document.createElement("h3");
+                spazioParolaLungaFrase.textContent= "Parola più lunga per ogni frase";
+                resultsElement.appendChild(spazioParolaLungaFrase);
+                
+                for(i=0, j=1; i<dataFrase.length, j<dataFrase.length + 1; i++, j++){
+                    var parolaLungaPerFraseElement = document.createElement("p");
+                    parolaLungaPerFraseElement.textContent = "Frase n°: " + j + ". Parola più lunga: " + dataFrase[i].parolaPiùLunga;
+                    resultsElement.appendChild(parolaLungaPerFraseElement);
+                    }
+                var spazioParolaChiaveFrase = document.createElement("h3");
+                spazioParolaChiaveFrase.textContent= "Parola più usata per ogni frase";
+                resultsElement.appendChild(spazioParolaChiaveFrase);
+                
+                for(i=0, j=1; i<dataFrase.length, j<dataFrase.length + 1; i++, j++){
+                    var parolaChiavePerFraseElement = document.createElement("p");
+                    parolaChiavePerFraseElement.textContent = "Frase n°: " + j + ". Parola più usata: " + dataFrase[i].parolaChiave;
+                    resultsElement.appendChild(parolaChiavePerFraseElement);
+                    }
+                
+         
+            
+            });
+    </script>
+</body>
+</html>

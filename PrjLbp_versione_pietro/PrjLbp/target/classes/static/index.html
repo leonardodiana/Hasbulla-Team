@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>Analizzatore di Testo</title>
+    <style type="text/css">
+    	@charset "ISO-8859-1";
+		body {
+		    font-family: Arial, sans-serif;
+		    margin: 20px;
+		    background-color: rgb(58, 58, 245);
+		    color: white;
+		}
+		
+		textarea {
+		    width: 100%;
+		    height: 100px;
+		    margin-bottom: 10px;
+		    border-radius: 1%;
+		}
+		
+		button {
+		    padding: 10px 20px;
+		    font-size: 16px;
+		    background-color: rgb(105, 121, 240);
+		    border-radius: 20%;
+		}
+		
+		p {
+		    margin-top: 0;
+		    color: white;
+		}
+		
+		.results {
+		    margin-top: 20px;
+		    border-top: 1px solid #ccc;
+		    padding-top: 10px;
+		}
+    </style>
+</head>
+<body>
+    <h1>Analizzatore di Testo</h1>
+
+   <form action="/analizza" method="post"> 
+   		<label for="testo">Inserisci il testo da analizzare:</label>
+        <textarea id ="testo" name="testo"></textarea>
+        <button type="submit" value="Subtim">Analizza</button>
+    </form> 
+
+    <div class="results">
+        <p id="sentenceCount">Numero di frasi: </p>
+        <p id="wordCount">Numero di parole: </p>
+        <p id="letterCount">Numero di lettere: </p>
+    </div>
+    
+
+    <script>
+    </script>
+</body>
+</html>
